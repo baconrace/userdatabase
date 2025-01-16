@@ -3,15 +3,12 @@ const app = express();
 const port = 3000;
 const { addUser } = require("./database/services");
 const bodyParser = require("body-parser");
-const bcrypt = require("bcrypt");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
 
 app.set("view engine", "ejs");
-
-const saltRounds = 10;
 
 app.get("/", (req, res) => {
   res.render("index");
@@ -24,10 +21,7 @@ app.get("/signup", (req, res) => {
 app.post("/signup", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-
-  bcrypt.hash(password, saltRounds, function (err, hashedPassword) {
-    addUser(email, hashedPassword);
-  });
+  addUser(email, password);
 
   return res.redirect("/signup");
 });
