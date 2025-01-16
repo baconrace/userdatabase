@@ -14,4 +14,8 @@ async function addUser(email, password) {
   connection.end();
 }
 
+async function authenticateuser(email, password) {
+  const connection = await createConnection();
+}
+
 module.exports = { addUser };

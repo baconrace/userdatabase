@@ -26,6 +26,19 @@ app.post("/signup", (req, res) => {
   return res.redirect("/signup");
 });
 
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
+app.post("/login", (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  addUser(email, password);
+
+  return res.redirect("/login");
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
